@@ -18,7 +18,7 @@ export class Category {
   slug: string;
 
   @Column({ type: 'boolean', default: 1 })
-  staus: boolean;
+  status: boolean;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
