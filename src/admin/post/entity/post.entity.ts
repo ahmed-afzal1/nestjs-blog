@@ -1,7 +1,11 @@
+import { Category } from 'src/admin/category/entity/category.entity';
+import { Tag } from 'src/admin/tag/entity/tag.entity';
+import { User } from 'src/admin/user/entity/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -31,4 +35,13 @@ export class Post {
 
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updated_at: Date;
+
+  @ManyToOne(() => Category, (category) => category.posts)
+  category: Category;
+
+  @ManyToOne(() => User, (user) => user.posts)
+  user: User;
+
+  @ManyToOne(() => Tag, (tag) => tag.posts)
+  tag: Tag;
 }

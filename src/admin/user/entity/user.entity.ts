@@ -3,12 +3,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
 
 import * as bcrypt from 'bcrypt';
+import { Post } from 'src/admin/post/entity/post.entity';
 
 @Entity()
 export class User {
@@ -40,4 +42,7 @@ export class User {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(password || this.password, salt);
   }
+
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[];
 }
