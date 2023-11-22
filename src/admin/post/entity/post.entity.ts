@@ -1,11 +1,14 @@
 import { Category } from 'src/admin/category/entity/category.entity';
+import { Favourite } from 'src/admin/favourite/entity/favourite.entity';
 import { Tag } from 'src/admin/tag/entity/tag.entity';
 import { User } from 'src/admin/user/entity/user.entity';
+import { Comment } from 'src/front/comment/entity/comment.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -44,4 +47,10 @@ export class Post {
 
   @ManyToOne(() => Tag, (tag) => tag.posts)
   tag: Tag;
+
+  @OneToMany(() => Comment, (comment) => comment.post)
+  comments: Comment[];
+
+  @OneToMany(() => Favourite, (favourite) => favourite.post)
+  favourites: Favourite[];
 }

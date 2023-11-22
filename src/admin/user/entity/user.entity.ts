@@ -11,6 +11,8 @@ import {
 
 import * as bcrypt from 'bcrypt';
 import { Post } from 'src/admin/post/entity/post.entity';
+import { Comment } from 'src/front/comment/entity/comment.entity';
+import { Favourite } from 'src/admin/favourite/entity/favourite.entity';
 
 @Entity()
 export class User {
@@ -45,4 +47,10 @@ export class User {
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
+
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
+
+  @OneToMany(() => Favourite, (favourite) => favourite.user)
+  favourites: Favourite[];
 }

@@ -9,7 +9,8 @@ import { TagModule } from './admin/tag/tag.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { BlogModule } from './front/blog/blog.module';
 import { HomeModule } from './front/home/home.module';
-
+import { CommentModule } from './front/comment/comment.module';
+import { FavouriteModule } from './admin/favourite/favourite.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -22,6 +23,8 @@ import { HomeModule } from './front/home/home.module';
     TagModule,
     BlogModule,
     HomeModule,
+    CommentModule,
+    FavouriteModule,
   ],
   controllers: [],
   providers: [],

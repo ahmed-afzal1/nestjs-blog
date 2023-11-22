@@ -29,6 +29,7 @@ export class PostService {
     const posts = await this.postRepository
       .createQueryBuilder('post')
       .leftJoinAndSelect('post.user', 'user')
+      .leftJoinAndSelect('post.comments', 'comments')
       .select([
         'post.id',
         'post.title',
@@ -60,12 +61,15 @@ export class PostService {
 
   async findById(id: number) {
     return this.postRepository.findOne({
-      relations: { user: true, category: true, tag: true },
+      relations: { user: true, category: true, tag: true, comments: true },
       where: { id },
     });
   }
 
   async findBySlug(slug: string) {
-    return await this.postRepository.findOne({ where: { slug } });
+    return await this.postRepository.findOne({
+      relations: { user: true, category: true, tag: true, comments: true },
+      where: { slug },
+    });
   }
 }
